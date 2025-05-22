@@ -44,7 +44,6 @@ PROJECT_NAME = config["PROJECT_NAME"]
 LOG_DIR = BASE_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 
-# Application definition
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -58,7 +57,7 @@ INSTALLED_APPS = [
 THIRD_PARTY_APPS = ["rest_framework", "drf_spectacular"]
 INSTALLED_APPS += THIRD_PARTY_APPS
 
-MY_APPS = ["auth_user", "customer", "vehicle", "invoice"]
+MY_APPS = ["auth_user", "customer", "vehicle", "invoice", "payment"]
 
 INSTALLED_APPS += MY_APPS
 

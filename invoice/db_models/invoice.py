@@ -3,6 +3,7 @@ from base.db_models.model import BaseModel
 
 from utils.functions import get_uuid
 
+from ..constants import PaymentStatus
 
 class Invoice(BaseModel, models.Model):
     """
@@ -18,8 +19,13 @@ class Invoice(BaseModel, models.Model):
     weight = models.DecimalField(max_digits=10, decimal_places=2)
     rate = models.DecimalField(max_digits=10, decimal_places=2)
     total = models.DecimalField(max_digits=12, decimal_places=2)
-    status = models.CharField(max_length=20, default="PENDING")
-
+    status = models.CharField(
+        max_length=20,
+        choices=PaymentStatus.CHOICES,
+        default=PaymentStatus.PENDING
+    )
+    
+    
     class Meta:
         db_table = "invoice"
 

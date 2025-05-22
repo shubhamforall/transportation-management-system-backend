@@ -33,6 +33,9 @@ urlpatterns = [
     
     #Invoice Management API
     path("api/", include("invoice.urls")),
+
+    # Payment Management API
+    path("api/", include("payment.urls")),
     
     # User load data API
     path("api/", include("utils.load_data.urls")),
