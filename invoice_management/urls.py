@@ -1,5 +1,5 @@
 """
-URL configuration for invoice_management_backend project.
+URL configuration for invoice_management project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
@@ -30,6 +30,9 @@ urlpatterns = [
     
     #Vehicle Management API
     path("api/", include("vehicle.urls")),
+    
+    #Invoice Management API
+    path("api/", include("invoice.urls")),
     
     # User load data API
     path("api/", include("utils.load_data.urls")),

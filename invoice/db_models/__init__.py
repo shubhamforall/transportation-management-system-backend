@@ -1,3 +1,3 @@
-from .invoice import Invoice
+from ..db_models.invoice import Invoice
 
 __all__ = ["Invoice"]

@@ -1,5 +1,5 @@
 """
-ASGI config for invoice_management_backend project.
+ASGI config for invoice_management project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'invoice_management_backend.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'invoice_management.settings')
 
 application = get_asgi_application()

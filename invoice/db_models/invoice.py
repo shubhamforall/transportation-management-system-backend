@@ -10,7 +10,6 @@ class Invoice(BaseModel, models.Model):
     """
 
     invoice_id = models.CharField(max_length=36, primary_key=True, default=get_uuid)
-    invoice_number = models.CharField(max_length=50, unique=True)
     customer = models.ForeignKey("customer.Customer", on_delete=models.CASCADE)
     vehicle = models.ForeignKey("vehicle.Vehicle", on_delete=models.CASCADE)
     date = models.DateField()
@@ -27,9 +26,8 @@ class Invoice(BaseModel, models.Model):
     def to_dict(self):
         return {
             "invoice_id": self.invoice_id,
-            "invoice_number": self.invoice_number,
-            "customer_id": self.customer.customer_id,
-            "vehicle_id": self.vehicle.vehicle_id,
+            "customer": self.customer.customer_id,
+            "vehicle": self.vehicle.vehicle_id,
             "date": self.date,
             "loading_address": self.loading_address,
             "delivery_address": self.delivery_address,

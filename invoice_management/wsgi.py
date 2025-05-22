@@ -1,5 +1,5 @@
 """
-WSGI config for invoice_management_backend project.
+WSGI config for invoice_management project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'invoice_management_backend.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'invoice_management.settings')
 
 application = get_wsgi_application()
