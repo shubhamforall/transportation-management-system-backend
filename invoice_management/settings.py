@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
-THIRD_PARTY_APPS = ["rest_framework", "drf_spectacular"]
+THIRD_PARTY_APPS = ["rest_framework", "drf_spectacular", "corsheaders"]
 INSTALLED_APPS += THIRD_PARTY_APPS
 
 MY_APPS = ["auth_user", "customer", "vehicle", "invoice", "payment"]
@@ -68,6 +68,7 @@ TOKEN_AUTHENTICATION_CLASS = "authentication.token.TokenAuthentication"
 AUTHENTICATION_CLASSES = [TOKEN_AUTHENTICATION_CLASS]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "middleware.exc.DRFExceptionMiddleware",
     "middleware.res.AddResponseHeadersMiddleware",
     "django.middleware.security.SecurityMiddleware",
@@ -101,6 +102,12 @@ TEMPLATES = [
         },
     },
 ]
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
 
 WSGI_APPLICATION = "invoice_management.wsgi.application"
 

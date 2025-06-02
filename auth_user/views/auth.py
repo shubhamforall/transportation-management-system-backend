@@ -61,9 +61,17 @@ class LoginViewSet(CreateView, viewsets.ViewSet):
         """
         Handle post-save actions after user login.
         """
+        data = obj.to_dict()
+        user = obj.user
+
+        full_name = f"{user.first_name} {user.last_name}".strip()
+
+        data.update({
+            "full_name": full_name,
+        })
 
         return generate_response(
-            data=obj.to_dict(),
+            data=data,
             status_code=status.HTTP_201_CREATED,
             messages={"message": "Logged in successful."},
         )
