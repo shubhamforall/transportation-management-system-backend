@@ -1,9 +1,10 @@
 """ 
-Customer model for invoice management.
+Customer model for tms.
 Contains configurations unique to customer module.
 """
 from django.db import models
 from base.db_models.model import BaseModel
+from customer.constants import CustomerTypeChoices
 from utils.functions import get_uuid
 
 
@@ -17,8 +18,10 @@ class Customer(BaseModel, models.Model):
         primary_key=True,
         default=get_uuid,
     )
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    customer_type = models.CharField(max_length=64, choices=CustomerTypeChoices.choices)
+    company_name = models.CharField(max_length=100, null=True, default=None)
+    first_name = models.CharField(max_length=50, null=True, default=None)
+    last_name = models.CharField(max_length=50, null=True, default=None)
     mobile_number = models.CharField(max_length=15)
     email = models.EmailField(max_length=100, unique=True)
     address = models.CharField(max_length=255)
@@ -49,6 +52,8 @@ class Customer(BaseModel, models.Model):
         """
         return {
             "customer_id": self.customer_id,
+            "customer_type": self.customer_type,
+            "company_name": self.company_name,
             "first_name": self.first_name,
             "last_name": self.last_name,
             "full_name": self.get_full_name,

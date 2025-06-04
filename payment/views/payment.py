@@ -14,11 +14,11 @@ class PaymentViewSet(ListView, viewsets.ViewSet):
 
     authentication_classes = get_authentication_classes()
     is_pagination = False
-    list_serializer_class = None 
-    manager = customer_manager 
+    list_serializer_class = None
+    manager = customer_manager
 
     def get_list(self, objects, request=None):
-
+        # Get all customers from DB
         customers = Customer.objects.all()
 
         result = []
@@ -30,7 +30,8 @@ class PaymentViewSet(ListView, viewsets.ViewSet):
             pending = total - paid
 
             result.append({
-                "customer": customer.customer_id,
+                "customer_id": customer.customer_id,
+                "full_name": customer.get_full_name,
                 "total_amount": total,
                 "paid_amount": paid,
                 "pending_amount": pending,

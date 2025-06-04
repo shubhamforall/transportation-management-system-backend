@@ -1,10 +1,10 @@
-class PaymentStatus:
-    PENDING = "PENDING"
-    PAID = "PAID"
-    FAILED = "FAILED"
+from django.db import models
 
-    CHOICES = [
-        (PENDING, "Pending"),
-        (PAID, "Paid"),
-        (FAILED, "Failed"),
-    ]
+
+class InvoiceStatusChoices(models.TextChoices):
+    """
+    Enum for invoice status.
+    """
+
+    PENDING = "PENDING", "Pending"
+    PAID = "PAID", "Paid"

@@ -5,6 +5,7 @@ and makes it available for use in other parts of the application.
 
 from rest_framework import serializers
 
+from customer.constants import CustomerTypeChoices
 from utils.messages import error
 from utils.exceptions import codes
 
@@ -16,8 +17,10 @@ class CustomerSerializer(serializers.Serializer):
     Serializer for both creating and updating a customer.
     """
 
-    first_name = serializers.CharField(required=True, max_length=50)
-    last_name = serializers.CharField(required=True, max_length=50)
+    customer_type = serializers.ChoiceField(choices=CustomerTypeChoices.choices)
+    company_name = serializers.CharField(max_length=100)
+    first_name = serializers.CharField(max_length=50, required=False, allow_blank=True)
+    last_name = serializers.CharField(max_length=50, required=False, allow_blank=True)
     mobile_number = serializers.CharField(required=True, max_length=15)
     email = serializers.EmailField(required=True, max_length=100)
     address = serializers.CharField(required=True, max_length=255)
