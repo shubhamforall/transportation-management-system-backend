@@ -12,6 +12,7 @@ from base.views import CreateView, DeleteView
 from authentication import get_authentication_classes
 from authentication.exception import WrongCredentialsException
 
+from utils.cache import cache
 from utils.response.response import generate_response
 from utils.swagger import (
     responses_400,
@@ -45,7 +46,6 @@ class LoginViewSet(CreateView, viewsets.ViewSet):
         """
         Handle user login by validating credentials and generating a token.
         """
-
         user_obj = user_manager.get(
             {"email": data["username"], "password": data["password"]}
         )
@@ -54,6 +54,11 @@ class LoginViewSet(CreateView, viewsets.ViewSet):
             raise WrongCredentialsException()
 
         self.manager.delete({"user": user_obj}, soft_delete=False)
+
+        token = secrets.token_hex(16).upper()
+
+        cache.set(f"user_token:{user_obj.user_id}", token)
+        print("Token set in cache:", cache.get(f"user_token:{user_obj.user_id}"))
 
         return {"user": user_obj, "token": secrets.token_hex(16).upper()}
 
@@ -66,9 +71,11 @@ class LoginViewSet(CreateView, viewsets.ViewSet):
 
         full_name = f"{user.first_name} {user.last_name}".strip()
 
-        data.update({
-            "full_name": full_name,
-        })
+        data.update(
+            {
+                "full_name": full_name,
+            }
+        )
 
         return generate_response(
             data=data,
@@ -83,6 +90,8 @@ class LoginViewSet(CreateView, viewsets.ViewSet):
         tags=["Authentication"],
     )
     def create(self, request, *args, **kwargs):
+        """Handle user login by validating credentials and generating a token."""
+
         return super().create(request, *args, **kwargs)
 
 
@@ -107,6 +116,8 @@ class LogoutViewSet(DeleteView, viewsets.ViewSet):
         """
 
         self.manager.delete({"user": request.user}, soft_delete=False)
+
+        cache.delete(f"user_token:{request.user.id}")
 
         return generate_response(
             data=None,

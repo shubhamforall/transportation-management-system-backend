@@ -16,6 +16,14 @@ from auth_user.views import LoginViewSet, LogoutViewSet
 
 
 urlpatterns = [
-    path("login", LoginViewSet.as_view(LoginViewSet.get_method_view_mapping()), name="login"),
-    path("logout", LogoutViewSet.as_view(LogoutViewSet.get_method_view_mapping()), name="logout"),
+    path(
+        "login",
+        LoginViewSet.as_view(LoginViewSet.get_method_view_mapping()),
+        name="login",
+    ),
+    path(
+        "logout",
+        LogoutViewSet.as_view(LogoutViewSet.get_method_view_mapping()),
+        name="logout",
+    ),
 ]

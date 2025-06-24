@@ -5,8 +5,7 @@ User ViewSet for handling user endpoints.
 from rest_framework import viewsets
 from drf_spectacular.utils import extend_schema
 
-from utils.response import generate_response
-from base.views import BaseView, RetrieveView
+from base.views import BaseView
 from authentication import get_authentication_classes
 
 from utils.swagger import (
@@ -19,9 +18,7 @@ from utils.swagger import (
 )
 
 from ..serializers import UserSerializer
-from ..db_access import (
-    user_manager
-)
+from ..db_access import user_manager
 from ..swagger import (
     UserResponseSerializer,
     UserListResponseSerializer,
@@ -53,6 +50,7 @@ class UserViewSet(BaseView, viewsets.ViewSet):
         tags=["User"],
     )
     def create(self, request, *args, **kwargs):
+        """Create a new user."""
         return super().create(request, *args, **kwargs)
 
     @extend_schema(
@@ -65,6 +63,7 @@ class UserViewSet(BaseView, viewsets.ViewSet):
         tags=["User"],
     )
     def list_all(self, request, *args, **kwargs):
+        """List all users."""
         return super().list_all(request, *args, **kwargs)
 
     @extend_schema(
@@ -77,6 +76,7 @@ class UserViewSet(BaseView, viewsets.ViewSet):
         tags=["User"],
     )
     def retrieve(self, request, *args, **kwargs):
+        """Retrieve a user by ID."""
         return super().retrieve(request, *args, **kwargs)
 
     @extend_schema(
@@ -89,6 +89,7 @@ class UserViewSet(BaseView, viewsets.ViewSet):
         tags=["User"],
     )
     def update(self, request, *args, **kwargs):
+        """Update a user by ID."""
         return super().update(request, *args, **kwargs)
 
     @extend_schema(
@@ -101,33 +102,5 @@ class UserViewSet(BaseView, viewsets.ViewSet):
         tags=["User"],
     )
     def destroy(self, request, *args, **kwargs):
+        """Delete a user by ID."""
         return super().destroy(request, *args, **kwargs)
-
-
-class UserProfileViewSet(RetrieveView, viewsets.ViewSet):
-    """
-    ViewSet for handling user profile endpoints.
-    """
-
-    authentication_classes = get_authentication_classes()
-
-    def retrieve(self, request, *args, **kwargs):
-
-        return generate_response(
-            data={
-                **request.user.to_dict(),
-                "roles": [
-                    role.to_dict()
-                    for role in role_manager.list(
-                        {
-                            "role_id__in": [
-                                role.role_id
-                                for role in user_role_mapping_manager.list(
-                                    {"user_id": request.user.user_id}
-                                )
-                            ]
-                        }
-                    )
-                ],
-            }
-        )
