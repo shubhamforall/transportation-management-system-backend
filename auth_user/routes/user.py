@@ -22,14 +22,9 @@ Note:
 
 from django.urls import path
 
-from auth_user.views import UserViewSet, UserProfileViewSet
+from auth_user.views import UserViewSet
 
 urlpatterns = [
-    path(
-        "user/profile",
-        UserProfileViewSet.as_view(UserProfileViewSet.get_method_view_mapping()),
-        name="user-profile",
-    ),
     path(
         "user", UserViewSet.as_view(UserViewSet.get_method_view_mapping()), name="User"
     ),
