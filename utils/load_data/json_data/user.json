@@ -1,0 +1,20 @@
+{
+    "data": [
+        {
+            "user_id": "ed0b2cfb-864a-4c34-93d1-8876bbb5cd7a",
+            "email": "patilshubham0514@gmail.com",
+            "first_name": "Shubham",
+            "last_name": "Patil",
+            "phone_number": "9878786565",
+            "password": "Shubham@123"
+        },
+                {
+            "user_id": "ed0b2cfb-864a-4c34-93d1-8876bhj5cd7a",
+            "email": "patilpurva0514@gmail.com",
+            "first_name": "Purva",
+            "last_name": "Patil",
+            "phone_number": "9878786565",
+            "password": "Purva@123"
+        }
+    ]
+}
