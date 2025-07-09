@@ -30,6 +30,7 @@ from ..serializers import (
     Vehicle_update_success_example,
     Vehicle_delete_success_example,
 )
+from ..serializers.query import VehicleQuerySerializer
 
 MODULE_NAME = "Vehicle"
 
@@ -42,7 +43,15 @@ class VehicleViewSet(BaseView, viewsets.ViewSet):
     authentication_classes = get_authentication_classes()
     manager = vehicle_manager
     serializer_class = VehicleSerializer
+    list_serializer_class = VehicleQuerySerializer
     lookup_field = "vehicle_id"
+    search_fields = [
+        "vehicle_name",
+        "vehicle_type",
+        "vehicle_number",
+        "vehicle_model",
+        "vehicle_color",
+    ]
 
     @extend_schema(
         responses={201: VehicleResponseSerializer, **responses_400, **responses_401},
@@ -69,6 +78,7 @@ class VehicleViewSet(BaseView, viewsets.ViewSet):
             responses_401_example,
         ],
         tags=[MODULE_NAME],
+        parameters=[VehicleQuerySerializer(partial=True)],
     )
     def list_all(self, request, *args, **kwargs):
         """List all vehicles."""

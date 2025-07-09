@@ -30,6 +30,7 @@ from ..serializers import (
     Customer_update_success_example,
     Customer_delete_success_example,
 )
+from ..serializers.query import CustomerQuerySerializer
 
 MODULE_NAME = "Customer"
 
@@ -42,7 +43,15 @@ class CustomerViewSet(BaseView, viewsets.ViewSet):
     authentication_classes = get_authentication_classes()
     manager = customer_manager
     serializer_class = CustomerSerializer
+    list_serializer_class = CustomerQuerySerializer
     lookup_field = "customer_id"
+    search_fields = [
+        "customer_type",
+        "company_name",
+        "first_name",
+        "last_name",
+        "email",
+    ]
 
     @extend_schema(
         responses={201: CustomerResponseSerializer, **responses_400, **responses_401},
@@ -69,6 +78,7 @@ class CustomerViewSet(BaseView, viewsets.ViewSet):
             responses_401_example,
         ],
         tags=[MODULE_NAME],
+        parameters=[CustomerQuerySerializer(partial=True)],
     )
     def list_all(self, request, *args, **kwargs):
         """List all customers."""

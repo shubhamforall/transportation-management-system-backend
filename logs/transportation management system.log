@@ -31,3 +31,91 @@ Traceback (most recent call last):
 AttributeError: 'User' object has no attribute 'id'
 
 ---------------------------------------------------------------------------------------------------------------------
+[2025-07-09 15:52:01,818] INFO [FUNC:- handle] 
+Loading data from files...
+---------------------------------------------------------------------------------------------------------------------
+[2025-07-09 15:52:02,053] INFO [FUNC:- handle] 
+Data loaded successfully.
+---------------------------------------------------------------------------------------------------------------------
+[2025-07-09 15:53:28,383] INFO [FUNC:- handle] 
+Loading data from files...
+---------------------------------------------------------------------------------------------------------------------
+[2025-07-09 15:53:28,512] INFO [FUNC:- handle] 
+Data loaded successfully.
+---------------------------------------------------------------------------------------------------------------------
+[2025-07-09 15:54:34,241] INFO [FUNC:- handle] 
+Loading data from files...
+---------------------------------------------------------------------------------------------------------------------
+[2025-07-09 15:54:34,419] INFO [FUNC:- handle] 
+Data loaded successfully.
+---------------------------------------------------------------------------------------------------------------------
+[2025-07-09 15:57:54,169] INFO [FUNC:- handle] 
+Loading data from files...
+---------------------------------------------------------------------------------------------------------------------
+[2025-07-09 15:57:54,349] INFO [FUNC:- handle] 
+Data loaded successfully.
+---------------------------------------------------------------------------------------------------------------------
+[2025-07-09 17:44:51,197] ERROR [FUNC:- log_exception] 
+Traceback (most recent call last):
+  File "C:\Users\Sagacity\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sagacity\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sagacity\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sagacity\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sagacity\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Sagacity\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Sagacity\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sagacity\Desktop\Project\TMS\transportation-management-system-backend\customer\views\customer.py", line 84, in list_all
+    return super().list_all(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sagacity\Desktop\Project\TMS\transportation-management-system-backend\base\views\list.py", line 32, in list_all
+    self.get_with_pagination(request, query)
+  File "C:\Users\Sagacity\Desktop\Project\TMS\transportation-management-system-backend\base\views\list.py", line 71, in get_with_pagination
+    "page": query_params["page"],
+            ~~~~~~~~~~~~^^^^^^^^
+KeyError: 'page'
+
+---------------------------------------------------------------------------------------------------------------------
+[2025-07-09 18:01:44,847] ERROR [FUNC:- log_exception] 
+Traceback (most recent call last):
+  File "C:\Users\Sagacity\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sagacity\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sagacity\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sagacity\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sagacity\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Sagacity\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Sagacity\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sagacity\Desktop\Project\TMS\transportation-management-system-backend\customer\views\customer.py", line 84, in list_all
+    return super().list_all(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Sagacity\Desktop\Project\TMS\transportation-management-system-backend\base\views\list.py", line 32, in list_all
+    self.get_with_pagination(request, query)
+  File "C:\Users\Sagacity\Desktop\Project\TMS\transportation-management-system-backend\base\views\list.py", line 71, in get_with_pagination
+    "page": query_params["page"],
+            ~~~~~~~~~~~~^^^^^^^^
+KeyError: 'page'
+
+---------------------------------------------------------------------------------------------------------------------

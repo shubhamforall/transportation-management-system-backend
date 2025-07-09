@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.urls import path, include
 from drf_spectacular.views import (
     SpectacularAPIView,
@@ -28,22 +29,14 @@ get_token_auth_schema()
 urlpatterns = [
     # User Management API
     path("api/", include("auth_user.urls")),
-    
     # Customer Management API
     path("api/", include("customer.urls")),
-    
-    #Vehicle Management API
+    # Vehicle Management API
     path("api/", include("vehicle.urls")),
-    
-    #Invoice Management API
+    # Invoice Management API
     path("api/", include("invoice.urls")),
-
     # Payment Management API
     path("api/", include("payment.urls")),
-    
-    # User load data API
-    path("api/", include("utils.load_data.urls")),
-    
     # Swagger Documentation
     path("api/schema", SpectacularAPIView.as_view(), name="schema"),
     path(

@@ -60,7 +60,7 @@ INSTALLED_APPS = [
 THIRD_PARTY_APPS = ["rest_framework", "drf_spectacular", "corsheaders"]
 INSTALLED_APPS += THIRD_PARTY_APPS
 
-MY_APPS = ["auth_user", "customer", "vehicle", "invoice", "payment"]
+MY_APPS = ["auth_user", "customer", "vehicle", "invoice", "payment", "cmds"]
 
 INSTALLED_APPS += MY_APPS
 
