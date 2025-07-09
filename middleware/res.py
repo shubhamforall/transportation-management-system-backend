@@ -35,5 +35,4 @@ class AddResponseHeadersMiddleware:
         response["Req-Performance-Time"] = str(_timedelta) + str(
             f"[HH:MM:SS:MS] | {_timedelta.total_seconds() * 1000}[MS]"
         )
-
         return response

@@ -21,6 +21,10 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 
+from .swagger import get_token_auth_schema
+
+get_token_auth_schema()
+
 urlpatterns = [
     # User Management API
     path("api/", include("auth_user.urls")),

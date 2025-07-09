@@ -18,7 +18,10 @@ class CustomerSerializer(serializers.Serializer):
     """
 
     customer_type = serializers.ChoiceField(choices=CustomerTypeChoices.choices)
-    company_name = serializers.CharField(max_length=100)
+    company_name = serializers.CharField(
+        max_length=100,
+        required=False,
+    )
     first_name = serializers.CharField(max_length=50, required=False, allow_blank=True)
     last_name = serializers.CharField(max_length=50, required=False, allow_blank=True)
     mobile_number = serializers.CharField(required=True, max_length=15)

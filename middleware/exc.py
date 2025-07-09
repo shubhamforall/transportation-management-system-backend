@@ -58,7 +58,6 @@ class DRFExceptionMiddleware(MiddlewareMixin):
         """
         This method catches exceptions and returns a JSON response.
         """
-
         if isinstance(exception, ValidationError):
             return generate_response(
                 create_json_response=True,

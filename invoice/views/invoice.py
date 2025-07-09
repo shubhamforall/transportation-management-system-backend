@@ -1,12 +1,41 @@
+"""
+Invoice ViewSet
+This module contains the InvoiceViewSet class, which is responsible for
+handling HTTP requests related to invoices.
+"""
+
 from rest_framework import viewsets
-from authentication import get_authentication_classes   
+from drf_spectacular.utils import extend_schema
+
+from authentication import get_authentication_classes
 
 from base.views import BaseView
+from utils.swagger import (
+    responses_400,
+    responses_404,
+    responses_401,
+    responses_400_example,
+    responses_404_example,
+    responses_401_example,
+)
+
 from ..db_access.invoice import invoice_manager
-from ..serializers.invoice import InvoiceSerializer
+from ..serializers import (
+    InvoiceSerializer,
+    InvoiceResponseSerializer,
+    InvoiceListResponseSerializer,
+    Invoice_create_success_example,
+    Invoice_getById_success_example,
+    Invoice_list_success_example,
+    Invoice_update_success_example,
+    Invoice_delete_success_example,
+)
 
 from customer.db_access import customer_manager
 from vehicle.db_access import vehicle_manager
+
+MODULE_NAME = "Invoice"
+
 
 class InvoiceViewSet(BaseView, viewsets.ViewSet):
     """
@@ -18,7 +47,80 @@ class InvoiceViewSet(BaseView, viewsets.ViewSet):
     serializer_class = InvoiceSerializer
     lookup_field = "invoice_id"
 
+    @extend_schema(
+        responses={201: InvoiceResponseSerializer, **responses_400, **responses_401},
+        examples=[
+            Invoice_create_success_example,
+            responses_400_example,
+            responses_401_example,
+        ],
+        tags=[MODULE_NAME],
+    )
+    def create(self, request, *args, **kwargs):
+        """Create a new invoice."""
+        return super().create(request, *args, **kwargs)
+
+    @extend_schema(
+        responses={
+            200: InvoiceListResponseSerializer,
+            **responses_404,
+            **responses_401,
+        },
+        examples=[
+            Invoice_list_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE_NAME],
+    )
+    def list_all(self, request, *args, **kwargs):
+        """List all invoices."""
+        return super().list_all(request, *args, **kwargs)
+
+    @extend_schema(
+        responses={200: InvoiceResponseSerializer, **responses_404, **responses_401},
+        examples=[
+            Invoice_getById_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE_NAME],
+    )
+    def retrieve(self, request, *args, **kwargs):
+        """Retrieve a specific invoice by its ID."""
+        return super().retrieve(request, *args, **kwargs)
+
+    @extend_schema(
+        responses={200: InvoiceResponseSerializer, **responses_404, **responses_401},
+        examples=[
+            Invoice_update_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE_NAME],
+    )
+    def update(self, request, *args, **kwargs):
+        """Update an existing invoice."""
+        return super().update(request, *args, **kwargs)
+
+    @extend_schema(
+        responses={204: InvoiceResponseSerializer, **responses_404, **responses_401},
+        examples=[
+            Invoice_delete_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE_NAME],
+    )
+    def destroy(self, request, *args, **kwargs):
+        """Delete an invoice."""
+        return super().destroy(request, *args, **kwargs)
+
     def get_list(self, objects, request=None):
+        """
+        Convert a list of invoice objects to a list of dictionaries with
+        additional customer and vehicle information.
+        """
         customer_ids = [obj.customer_id for obj in objects]
         vehicle_ids = [obj.vehicle_id for obj in objects]
 

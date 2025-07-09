@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+
 import os
 import json
 from pathlib import Path
@@ -28,12 +29,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+
 def load_env():
     """
     Load the env.json file
     """
     with open(BASE_DIR / "config/env.json", "r", encoding="UTF-8") as config_file:
         return json.load(config_file)
+
 
 config = load_env()
 
@@ -68,9 +71,9 @@ TOKEN_AUTHENTICATION_CLASS = "authentication.token.TokenAuthentication"
 AUTHENTICATION_CLASSES = [TOKEN_AUTHENTICATION_CLASS]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
     "middleware.exc.DRFExceptionMiddleware",
     "middleware.res.AddResponseHeadersMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -194,5 +197,27 @@ LOGGING = {
             "level": "DEBUG",
             "propagate": True,
         },
+    },
+}
+
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": PROJECT_NAME,
+    "DESCRIPTION": "TMS API",
+    "VERSION": 1.0,
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SWAGGER_UI_SETTINGS": {
+        "deepLinking": True,
+        "displayOperationId": True,
+    },
+    "SERVE_AUTHENTICATION": [],
+    "SECURITY": [{"TokenAuth": []}],
+    "COMPONENTS": {
+        "securitySchemes": {
+            "TokenAuth": {
+                "type": "http",
+                "scheme": "bearer",
+            }
+        }
     },
 }

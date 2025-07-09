@@ -1,8 +1,21 @@
-asgiref==3.8.1
-Django==5.2.1
-psycopg2-binary==2.9.10
-python-decouple==3.8
-sqlparse==0.5.3
-tzdata==2025.2
+# Project Requirements for Transportation Management System
+# Install using: pip install -r requirements.txt
+# Each package listed below includes a short description of its role in the project.
+
+# Django is a high-level Python web framework for rapid development and clean design.
+Django==5.2.3
+
+# Django REST Framework (DRF) helps build powerful and flexible web APIs using Django.
 djangorestframework==3.16.0
+
+# Middleware to handle Cross-Origin Resource Sharing (CORS), essential for frontend-backend communication.
+django-cors-headers==4.7.0
+
+# OpenAPI 3 schema generation and documentation for Django REST Framework.
 drf-spectacular==0.28.0
+
+# PostgreSQL database adapter for Python, required by Django to connect to PostgreSQL databases
+psycopg2-binary==2.9.10
+
+# Django Redis cache backend for caching purposes, improving performance.
+python-memcached==1.62
