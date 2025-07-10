@@ -11,6 +11,7 @@ class InvoiceSerializer(serializers.Serializer):
     """
     Serializer for creating and updating invoice instances.
     """
+
     customer_id = serializers.UUIDField(required=True)
     vehicle_id = serializers.UUIDField(required=True)
     date = serializers.DateField(required=True)
@@ -34,7 +35,7 @@ class InvoiceSerializer(serializers.Serializer):
                 code=codes.NO_DATA_FOUND,
             )
         return value
-    
+
     def validate_vehicle_id(self, value):
         """
         Validate the given vehicle ID. If the vehicle ID does not exist in the database,
@@ -46,5 +47,3 @@ class InvoiceSerializer(serializers.Serializer):
                 code=codes.NO_DATA_FOUND,
             )
         return value
-
-

@@ -30,6 +30,7 @@ from ..serializers import (
     Invoice_update_success_example,
     Invoice_delete_success_example,
 )
+from ..serializers.query import InvoiceQuerySerializer
 
 from customer.db_access import customer_manager
 from vehicle.db_access import vehicle_manager
@@ -45,7 +46,51 @@ class InvoiceViewSet(BaseView, viewsets.ViewSet):
     authentication_classes = get_authentication_classes()
     manager = invoice_manager
     serializer_class = InvoiceSerializer
+    list_serializer_class = InvoiceQuerySerializer
     lookup_field = "invoice_id"
+    search_fields = [
+        "date",
+        "status",
+        "customer_type",
+        "company_name",
+        "first_name",
+        "last_name",
+        "vehicle_name",
+        "vehicle_type",
+        "vehicle_number",
+    ]
+
+    def get_list_query_object(self, query=None, **_):
+        """
+        Override to provide custom query object for listing invoices.
+        """
+        query_obj = {}
+
+        company_type = query.pop("company_type", None)
+        if company_type:
+            query_obj["customer__company_type__icontains"] = company_type
+
+        company_name = query.pop("company_name", None)
+        if company_name:
+            query_obj["customer__company_name__icontains"] = company_name
+
+        first_name = query.pop("first_name", None)
+        if first_name:
+            query_obj["customer__first_name__icontains"] = first_name
+
+        last_name = query.pop("last_name", None)
+        if last_name:
+            query_obj["customer__last_name__icontains"] = last_name
+
+        vehicle_name = query.pop("vehicle_name", None)
+        if vehicle_name:
+            query_obj["vehicle__vehicle_name__icontains"] = vehicle_name
+
+        vehicle_type = query.pop("vehicle_type", None)
+        if vehicle_type:
+            query_obj["vehicle__vehicle_type__icontains"] = vehicle_type
+
+        return query_obj
 
     @extend_schema(
         responses={201: InvoiceResponseSerializer, **responses_400, **responses_401},
