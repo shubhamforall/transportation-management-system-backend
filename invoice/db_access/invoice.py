@@ -19,7 +19,7 @@ class InvoiceManager(manager.Manager[Invoice]):
 
 
 @receiver(post_save, sender=Invoice)
-def send_notification_on_quotation_movement(sender, instance: Invoice, created, **__):
+def send_notification_on_invoice_movement(sender, instance: Invoice, created, **__):
     """
     Signal receiver that sends a notification when a Invoice instance is created.
     """

@@ -37,6 +37,8 @@ urlpatterns = [
     path("api/", include("invoice.urls")),
     # Payment Management API
     path("api/", include("payment.urls")),
+    # Notification Management API
+    path("api/", include("notification.urls")),
     # Swagger Documentation
     path("api/schema", SpectacularAPIView.as_view(), name="schema"),
     path(

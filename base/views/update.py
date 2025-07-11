@@ -26,7 +26,9 @@ class UpdateView:
     serializer_class: serializers.Serializer = None
 
     @classmethod
-    def get_method_view_mapping(cls):
+    def get_method_view_mapping(cls, patch=True):
+        if not patch:
+            return {PUT: "update"}
         return {PATCH: "update", PUT: "update"}
 
     def add_common_data(self, data: dict | list, request):
@@ -54,7 +56,9 @@ class UpdateView:
         Returns:
             object: The updated object if the update is successful.
         """
-        query = {self.lookup_field: kwargs[self.lookup_field]}
+        query = {
+            self.lookup_field: kwargs[self.lookup_field],
+        }
 
         obj = self.manager.get(query=query)
         if not obj:
